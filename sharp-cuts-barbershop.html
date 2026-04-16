@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sharp Cuts Barbershop · Austin, TX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0e0e0e;
+    --off-white: #f5f0e8;
+    --cream: #ede8dc;
+    --gold: #c9a84c;
+    --gold-light: #e8d090;
+    --gold-dark: #8a6f2e;
+    --gray-mid: #4a4a4a;
+    --gray-light: #9a9a9a;
+    --serif: 'Playfair Display', serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--off-white);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(14,14,14,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--black);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.4rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 3rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(14,14,14,0.3) 0%, rgba(14,14,14,0.7) 60%, rgba(14,14,14,1) 100%),
+      repeating-linear-gradient(
+        45deg,
+        rgba(201,168,76,0.03) 0px,
+        rgba(201,168,76,0.03) 1px,
+        transparent 1px,
+        transparent 40px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        rgba(201,168,76,0.03) 0px,
+        rgba(201,168,76,0.03) 1px,
+        transparent 1px,
+        transparent 40px
+      );
+    background-color: #1a1510;
+  }
+  .hero-pole {
+    position: absolute; top: 0; right: 12rem;
+    width: 3px; height: 100%;
+    background: repeating-linear-gradient(
+      to bottom,
+      #c9a84c 0px, #c9a84c 30px,
+      #0e0e0e 30px, #0e0e0e 60px,
+      #f5f0e8 60px, #f5f0e8 90px,
+      #0e0e0e 90px, #0e0e0e 120px
+    );
+    opacity: 0.25;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 700px; }
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 1rem;
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block; width: 40px; height: 1px;
+    background: var(--gold);
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    margin-bottom: 1.5rem;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--gray-light);
+    max-width: 420px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  .btn-gold {
+    background: var(--gold);
+    color: var(--black);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 1rem 2.2rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--off-white);
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 1rem 2.2rem;
+    border: 1px solid rgba(245,240,232,0.3);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+  .hero-stats {
+    position: absolute; right: 3rem; bottom: 5rem; z-index: 1;
+    display: flex; flex-direction: column; gap: 1.5rem; text-align: right;
+  }
+  .hero-stat-num {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray-light);
+  }
+
+  /* ── SOCIAL BAR ── */
+  .social-bar {
+    background: rgba(201,168,76,0.08);
+    border-top: 1px solid rgba(201,168,76,0.2);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    padding: 1rem 3rem;
+    display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+  }
+  .social-bar-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    white-space: nowrap;
+  }
+  .social-links { display: flex; gap: 1.5rem; }
+  .social-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--gold-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .social-link:hover { color: var(--gold); }
+  .social-link svg { width: 15px; height: 15px; }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 3rem; }
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1; max-width: 60px; height: 1px;
+    background: var(--gold); opacity: 0.4;
+  }
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--off-white);
+    margin-bottom: 3rem;
+  }
+
+  /* ── SERVICES ── */
+  #services { background: #111; }
+  .services-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.12); }
+  .service-item {
+    background: #111;
+    padding: 2.5rem;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    transition: background 0.2s;
+    cursor: default;
+  }
+  .service-item:hover { background: rgba(201,168,76,0.05); }
+  .service-left {}
+  .service-name {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--off-white);
+    margin-bottom: 0.4rem;
+  }
+  .service-desc { font-size: 0.82rem; color: var(--gray-light); max-width: 220px; line-height: 1.6; }
+  .service-right { text-align: right; }
+  .service-price {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .service-time { font-size: 0.75rem; color: var(--gray-light); margin-top: 4px; letter-spacing: 0.05em; }
+
+  /* ── BARBERS ── */
+  #barbers { background: var(--black); }
+  .barbers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.1); }
+  .barber-item {
+    background: var(--black);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+  }
+  .barber-item:hover, .barber-item.active { background: rgba(201,168,76,0.07); }
+  .barber-item.active::after {
+    content: 'Selected';
+    position: absolute; top: 1rem; right: 1rem;
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); background: rgba(201,168,76,0.12);
+    padding: 3px 10px;
+  }
+  .barber-initials {
+    width: 72px; height: 72px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.2rem;
+    font-family: var(--serif); font-size: 1.4rem; font-weight: 700;
+    border: 2px solid rgba(201,168,76,0.3);
+    color: var(--gold);
+    background: rgba(201,168,76,0.08);
+  }
+  .barber-name {
+    font-family: var(--serif); font-size: 1.2rem; font-weight: 400;
+    color: var(--off-white); margin-bottom: 0.3rem;
+  }
+  .barber-spec { font-size: 0.78rem; color: var(--gray-light); letter-spacing: 0.05em; margin-bottom: 0.8rem; }
+  .barber-rating { font-size: 0.8rem; color: var(--gold); }
+  .barber-bio { font-size: 0.8rem; color: var(--gray-light); line-height: 1.7; margin-top: 0.8rem; }
+
+  /* ── BOOKING ── */
+  #booking { background: #0a0a0a; }
+  .booking-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .booking-info h2 { margin-bottom: 1rem; }
+  .booking-info p { color: var(--gray-light); font-size: 0.9rem; line-height: 1.9; margin-bottom: 2rem; }
+  .booking-features { display: flex; flex-direction: column; gap: 1rem; }
+  .booking-feature { display: flex; align-items: center; gap: 1rem; font-size: 0.85rem; color: var(--gray-light); }
+  .booking-feature::before { content: '—'; color: var(--gold); font-weight: 500; }
+
+  .booking-form { border: 1px solid rgba(201,168,76,0.2); padding: 2.5rem; }
+  .form-group { margin-bottom: 1.5rem; }
+  .form-label {
+    display: block; font-size: 0.72rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gray-light); margin-bottom: 0.6rem;
+  }
+  .form-control {
+    width: 100%; padding: 0.9rem 1rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.2);
+    color: var(--off-white); font-family: var(--sans);
+    font-size: 0.9rem; outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+  .form-control:focus { border-color: var(--gold); }
+  .form-control option { background: #1a1a1a; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .time-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 0.6rem; }
+  .time-btn {
+    padding: 0.6rem 0.4rem; text-align: center;
+    font-size: 0.78rem; letter-spacing: 0.05em;
+    border: 1px solid rgba(201,168,76,0.2);
+    background: transparent; color: var(--gray-light);
+    cursor: pointer; transition: all 0.15s;
+    font-family: var(--sans);
+  }
+  .time-btn:hover:not(.taken) { border-color: var(--gold); color: var(--gold-light); }
+  .time-btn.selected { background: var(--gold); color: var(--black); border-color: var(--gold); font-weight: 500; }
+  .time-btn.taken { opacity: 0.3; cursor: not-allowed; text-decoration: line-through; }
+
+  .submit-btn {
+    width: 100%; padding: 1.1rem;
+    background: var(--gold); color: var(--black);
+    border: none; font-family: var(--sans);
+    font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    cursor: pointer; margin-top: 0.5rem;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .submit-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  .confirm-banner {
+    display: none; margin-top: 1rem; padding: 1rem 1.2rem;
+    background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.4);
+    font-size: 0.85rem; color: var(--gold-light); line-height: 1.6;
+  }
+
+  /* ── REVIEWS ── */
+  #reviews { background: #111; }
+  .reviews-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
+  .reviews-score { text-align: right; }
+  .score-big { font-family: var(--serif); font-size: 4rem; font-weight: 900; color: var(--gold); line-height: 1; }
+  .score-stars { font-size: 1rem; color: var(--gold); margin: 0.3rem 0; }
+  .score-count { font-size: 0.78rem; color: var(--gray-light); letter-spacing: 0.05em; }
+  .reviews-grid-full { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.1); }
+  .review-item { background: #111; padding: 2rem; }
+  .review-top { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+  .review-avatar-full {
+    width: 42px; height: 42px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 0.9rem;
+    background: rgba(201,168,76,0.12); color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.25); flex-shrink: 0;
+  }
+  .review-meta-name { font-size: 0.9rem; font-weight: 500; color: var(--off-white); }
+  .review-meta-stars { font-size: 0.75rem; color: var(--gold); }
+  .review-text-full { font-size: 0.85rem; color: var(--gray-light); line-height: 1.8; font-style: italic; }
+  .review-text-full::before { content: '"'; color: var(--gold); font-family: var(--serif); font-size: 1.4rem; line-height: 0; vertical-align: -0.4em; margin-right: 2px; }
+
+  /* ── GALLERY ── */
+  #gallery { background: var(--black); padding-bottom: 2rem; }
+  .gallery-intro { max-width: 500px; margin-bottom: 3rem; }
+  .gallery-intro p { color: var(--gray-light); font-size: 0.9rem; line-height: 1.9; }
+  .gallery-grid-full { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+  .gallery-cell {
+    aspect-ratio: 1;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+    position: relative; overflow: hidden;
+    cursor: pointer;
+  }
+  .gallery-cell-bg { position: absolute; inset: 0; transition: transform 0.4s; }
+  .gallery-cell:hover .gallery-cell-bg { transform: scale(1.06); }
+  .gallery-cell-overlay {
+    position: absolute; inset: 0;
+    background: rgba(14,14,14,0.4);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .gallery-cell:hover .gallery-cell-overlay { opacity: 1; }
+  .gallery-cell-overlay span { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+  .gc1 .gallery-cell-bg { background: #1c1a15; }
+  .gc2 .gallery-cell-bg { background: #151a1c; }
+  .gc3 .gallery-cell-bg { background: #1c1518; }
+  .gc4 .gallery-cell-bg { background: #1a1c15; }
+  .gc5 .gallery-cell-bg { background: #1c1a15; }
+  .gc6 .gallery-cell-bg { background: #151a1c; }
+  .gc7 .gallery-cell-bg { background: #1c1518; }
+  .gc8 .gallery-cell-bg { background: #1a1c15; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #070707;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding: 3rem 3rem 2rem;
+  }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-brand { }
+  .footer-logo {
+    font-family: var(--serif); font-size: 1.4rem;
+    font-weight: 700; color: var(--gold); display: block; margin-bottom: 1rem;
+  }
+  .footer-tagline { font-size: 0.82rem; color: var(--gray-light); line-height: 1.8; max-width: 240px; }
+  .footer-col h4 {
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.2rem;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  .footer-col a { font-size: 0.85rem; color: var(--gray-light); text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--gold); }
+  .footer-col p { font-size: 0.85rem; color: var(--gray-light); line-height: 1.9; }
+  .footer-bottom {
+    border-top: 1px solid rgba(201,168,76,0.1);
+    padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-copy { font-size: 0.75rem; color: #555; }
+  .footer-social { display: flex; gap: 1.2rem; }
+  .footer-social a { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: #555; text-decoration: none; transition: color 0.2s; }
+  .footer-social a:hover { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-content > * { animation: fadeUp 0.7s ease both; }
+  .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-content > *:nth-child(2) { animation-delay: 0.25s; }
+  .hero-content > *:nth-child(3) { animation-delay: 0.4s; }
+  .hero-content > *:nth-child(4) { animation-delay: 0.55s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 3.5rem 1.5rem; }
+    .hero { padding: 0 1.5rem 4rem; }
+    .hero-stats { display: none; }
+    .hero-pole { display: none; }
+    .services-layout { grid-template-columns: 1fr; }
+    .barbers-grid { grid-template-columns: 1fr; }
+    .booking-layout { grid-template-columns: 1fr; gap: 2rem; }
+    .reviews-grid-full { grid-template-columns: 1fr; }
+    .gallery-grid-full { grid-template-columns: repeat(2, 1fr); }
+    .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+    .social-bar { padding: 1rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Sharp Cuts</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#barbers">Our team</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+  </ul>
+  <a class="nav-cta" href="#booking">Book now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pole"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Est. 2018 · East Austin, TX</div>
+    <h1>The <em>finest</em><br>cuts in<br>Austin.</h1>
+    <p class="hero-sub">Premium barbering with old-school craft and modern precision. Walk in confident, walk out sharp.</p>
+    <div class="hero-actions">
+      <a class="btn-gold" href="#booking">Book appointment</a>
+      <a class="btn-outline" href="#barbers">Meet the team</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="hero-stat-num">4.9</div>
+      <div class="hero-stat-label">Star rating</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">214+</div>
+      <div class="hero-stat-label">Reviews</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">6yr</div>
+      <div class="hero-stat-label">In business</div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL BAR -->
+<div class="social-bar">
+  <span class="social-bar-label">Follow us</span>
+  <div class="social-links">
+    <a class="social-link" href="https://instagram.com" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      @sharpcuts_atx
+    </a>
+    <a class="social-link" href="https://facebook.com" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      Sharp Cuts ATX
+    </a>
+    <a class="social-link" href="https://maps.google.com" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      2847 E 7th St, Austin TX
+    </a>
+    <a class="social-link" href="tel:+15125550189">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.09-.9a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      (512) 555-0189
+    </a>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">What we offer</div>
+  <h2>Services &<br>pricing</h2>
+  <div class="services-layout">
+    <div class="service-item">
+      <div class="service-left">
+        <div class="service-name">Classic cut</div>
+        <div class="service-desc">Precision scissor or clipper cut with hot towel neck finish</div>
+      </div>
+      <div class="service-right">
+        <div class="service-price">$35</div>
+        <div class="service-time">45 min</div>
+      </div>
+    </div>
+    <div class="service-item">
+      <div class="service-left">
+        <div class="service-name">Skin fade</div>
+        <div class="service-desc">Zero to skin taper with seamless blending and shape-up</div>
+      </div>
+      <div class="service-right">
+        <div class="service-price">$45</div>
+        <div class="service-time">50 min</div>
+      </div>
+    </div>
+    <div class="service-item">
+      <div class="service-left">
+        <div class="service-name">Beard trim & shape</div>
+        <div class="service-desc">Detailed beard sculpting with straight-razor lines</div>
+      </div>
+      <div class="service-right">
+        <div class="service-price">$25</div>
+        <div class="service-time">30 min</div>
+      </div>
+    </div>
+    <div class="service-item">
+      <div class="service-left">
+        <div class="service-name">Cut + beard combo</div>
+        <div class="service-desc">Full haircut plus complete beard grooming — the works</div>
+      </div>
+      <div class="service-right">
+        <div class="service-price">$55</div>
+        <div class="service-time">75 min</div>
+      </div>
+    </div>
+    <div class="service-item">
+      <div class="service-left">
+        <div class="service-name">Hot towel shave</div>
+        <div class="service-desc">Traditional straight-razor shave with warm lather</div>
+      </div>
+      <div class="service-right">
+        <div class="service-price">$40</div>
+        <div class="service-time">40 min</div>
+      </div>
+    </div>
+    <div class="service-item">
+      <div class="service-left">
+        <div class="service-name">Kids cut</div>
+        <div class="service-desc">Relaxed, patient cuts for boys 12 and under</div>
+      </div>
+      <div class="service-right">
+        <div class="service-price">$22</div>
+        <div class="service-time">30 min</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BARBERS -->
+<section id="barbers">
+  <div class="section-label">The team</div>
+  <h2>Our barbers</h2>
+  <div class="barbers-grid">
+    <div class="barber-item active" id="b1" onclick="selectBarber('b1')">
+      <div class="barber-initials">MR</div>
+      <div class="barber-name">Marcus Rivera</div>
+      <div class="barber-spec">Fades & tapers · 8 yrs exp</div>
+      <div class="barber-rating">★★★★★ 4.9 · 98 reviews</div>
+      <div class="barber-bio">Trained in Dallas, raised in Austin. Marcus specializes in skin fades and knows every hair texture. His regulars don't go anywhere else.</div>
+    </div>
+    <div class="barber-item" id="b2" onclick="selectBarber('b2')">
+      <div class="barber-initials">DJ</div>
+      <div class="barber-name">DeShawn Johnson</div>
+      <div class="barber-spec">Classic cuts · 12 yrs exp</div>
+      <div class="barber-rating">★★★★★ 4.8 · 142 reviews</div>
+      <div class="barber-bio">Old-school craft, new-school precision. DeShawn is the shop veteran — scissor work and pompadours are his signature.</div>
+    </div>
+    <div class="barber-item" id="b3" onclick="selectBarber('b3')">
+      <div class="barber-initials">LP</div>
+      <div class="barber-name">Luis Perez</div>
+      <div class="barber-spec">Beards & designs · 5 yrs exp</div>
+      <div class="barber-rating">★★★★★ 5.0 · 61 reviews</div>
+      <div class="barber-bio">Perfect 5.0. Luis brings meticulous attention to beard sculpting and hair art. Every line he draws is clean as a razor edge.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="booking-layout">
+    <div class="booking-info">
+      <div class="section-label">Reserve your chair</div>
+      <h2>Book your appointment</h2>
+      <p>Choose your barber, pick a time, and you're all set. Instant confirmation sent to your phone. No waiting, no surprises.</p>
+      <div class="booking-features">
+        <div class="booking-feature">Instant online booking, 24/7</div>
+        <div class="booking-feature">SMS reminder 1 hour before</div>
+        <div class="booking-feature">Free cancellation up to 2 hours prior</div>
+        <div class="booking-feature">Walk-ins welcome when available</div>
+      </div>
+    </div>
+    <div class="booking-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Service</label>
+          <select class="form-control">
+            <option>Classic cut — $35</option>
+            <option>Skin fade — $45</option>
+            <option>Beard trim — $25</option>
+            <option>Cut + beard — $55</option>
+            <option>Hot towel shave — $40</option>
+            <option>Kids cut — $22</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Barber</label>
+          <select class="form-control">
+            <option>Marcus Rivera</option>
+            <option>DeShawn Johnson</option>
+            <option>Luis Perez</option>
+            <option>Any available</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Date</label>
+        <input type="date" class="form-control" id="bookDate" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Available times</label>
+        <div class="time-grid">
+          <button class="time-btn taken">9:00 AM</button>
+          <button class="time-btn" onclick="selectTime(this)">10:00 AM</button>
+          <button class="time-btn taken">11:00 AM</button>
+          <button class="time-btn" onclick="selectTime(this)">12:00 PM</button>
+          <button class="time-btn" onclick="selectTime(this)">1:00 PM</button>
+          <button class="time-btn taken">2:00 PM</button>
+          <button class="time-btn" onclick="selectTime(this)">3:00 PM</button>
+          <button class="time-btn" onclick="selectTime(this)">4:00 PM</button>
+          <button class="time-btn" onclick="selectTime(this)">5:00 PM</button>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">First name</label>
+          <input type="text" class="form-control" placeholder="John" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone</label>
+          <input type="text" class="form-control" placeholder="(512) 000-0000" />
+        </div>
+      </div>
+      <button class="submit-btn" onclick="confirmBooking()">Confirm booking</button>
+      <div class="confirm-banner" id="confirmBanner">
+        Appointment confirmed! You'll receive an SMS reminder one hour before your visit. See you soon.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="reviews-header">
+    <div>
+      <div class="section-label">What people say</div>
+      <h2 style="margin-bottom:0;">Client reviews</h2>
+    </div>
+    <div class="reviews-score">
+      <div class="score-big">4.9</div>
+      <div class="score-stars">★★★★★</div>
+      <div class="score-count">214 Google reviews</div>
+    </div>
+  </div>
+  <div class="reviews-grid-full">
+    <div class="review-item">
+      <div class="review-top">
+        <div class="review-avatar-full">JT</div>
+        <div>
+          <div class="review-meta-name">James T.</div>
+          <div class="review-meta-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="review-text-full">Best fade in Austin, hands down. Marcus always knows exactly what I want without me having to say much. Won't go anywhere else.</div>
+    </div>
+    <div class="review-item">
+      <div class="review-top">
+        <div class="review-avatar-full">KW</div>
+        <div>
+          <div class="review-meta-name">Kevin W.</div>
+          <div class="review-meta-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="review-text-full">Booked online the night before, showed up and was out in 45 minutes looking fresh. Clean shop, great music, even better barbers.</div>
+    </div>
+    <div class="review-item">
+      <div class="review-top">
+        <div class="review-avatar-full">AM</div>
+        <div>
+          <div class="review-meta-name">Alex M.</div>
+          <div class="review-meta-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="review-text-full">Came in on a busy Saturday. Luis took his time and delivered the cleanest taper I've had in years. The attention to detail is unreal.</div>
+    </div>
+    <div class="review-item">
+      <div class="review-top">
+        <div class="review-avatar-full">RB</div>
+        <div>
+          <div class="review-meta-name">Roberto B.</div>
+          <div class="review-meta-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="review-text-full">DeShawn has been cutting my hair for 3 years. At this point I'd drive across the city for him. Real craftsmanship, no shortcuts.</div>
+    </div>
+    <div class="review-item">
+      <div class="review-top">
+        <div class="review-avatar-full">TC</div>
+        <div>
+          <div class="review-meta-name">Tyler C.</div>
+          <div class="review-meta-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="review-text-full">Took my 8-year-old son here for his first real haircut. They were patient, fun, and he left looking like a little gentleman. We'll be back.</div>
+    </div>
+    <div class="review-item">
+      <div class="review-top">
+        <div class="review-avatar-full">MG</div>
+        <div>
+          <div class="review-meta-name">Marcus G.</div>
+          <div class="review-meta-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="review-text-full">Online booking is a game changer. Got a confirmation text, a reminder, and the cut was exactly what I asked for. Professional all the way.</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-intro">
+    <div class="section-label">Our work</div>
+    <h2>The cuts speak<br>for themselves</h2>
+    <p>Follow us on Instagram <strong style="color:var(--gold)">@sharpcuts_atx</strong> for daily work, behind-the-scenes content, and last-minute appointment openings.</p>
+  </div>
+  <div class="gallery-grid-full">
+    <div class="gallery-cell gc1">
+      <div class="gallery-cell-bg"></div>
+      <div class="gallery-cell-overlay"><span>View on IG</span></div>
+      <span style="position:relative;z-index:1;font-size:2rem;">✂</span>
+    </div>
+    <div class="gallery-cell gc2">
+      <div class="gallery-cell-bg"></div>
+      <div class="gallery-cell-overlay"><span>View on IG</span></div>
+      <span style="position:relative;z-index:1;font-size:2rem;">💈</span>
+    </div>
+    <div class="gallery-cell gc3">
+      <div class="gallery-cell-bg"></div>
+      <div class="gallery-cell-overlay"><span>View on IG</span></div>
+      <span style="position:relative;z-index:1;font-size:2rem;">✂</span>
+    </div>
+    <div class="gallery-cell gc4">
+      <div class="gallery-cell-bg"></div>
+      <div class="gallery-cell-overlay"><span>View on IG</span></div>
+      <span style="position:relative;z-index:1;font-size:2rem;">💈</span>
+    </div>
+    <div class="gallery-cell gc5">
+      <div class="gallery-cell-bg"></div>
+      <div class="gallery-cell-overlay"><span>View on IG</span></div>
+      <span style="position:relative;z-index:1;font-size:2rem;">✂</span>
+    </div>
+    <div class="gallery-cell gc6">
+      <div class="gallery-cell-bg"></div>
+      <div class="gallery-cell-overlay"><span>View on IG</span></div>
+      <span style="position:relative;z-index:1;font-size:2rem;">💈</span>
+    </div>
+    <div class="gallery-cell gc7">
+      <div class="gallery-cell-bg"></div>
+      <div class="gallery-cell-overlay"><span>View on IG</span></div>
+      <span style="position:relative;z-index:1;font-size:2rem;">✂</span>
+    </div>
+    <div class="gallery-cell gc8">
+      <div class="gallery-cell-bg"></div>
+      <div class="gallery-cell-overlay"><span>View on IG</span></div>
+      <span style="position:relative;z-index:1;font-size:2rem;">💈</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="footer-logo">Sharp Cuts Barbershop</span>
+      <p class="footer-tagline">Premium cuts and grooming in the heart of East Austin since 2018. Old-school craft, modern precision.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#barbers">Our team</a></li>
+        <li><a href="#booking">Book now</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Visit us</h4>
+      <p>2847 E 7th Street<br>Austin, TX 78702<br><br>Mon – Fri: 9am – 7pm<br>Saturday: 9am – 6pm<br>Sunday: 10am – 4pm<br><br>(512) 555-0189</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2024 Sharp Cuts Barbershop · Austin, TX · All rights reserved</p>
+    <div class="footer-social">
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+      <a href="https://facebook.com" target="_blank">Facebook</a>
+      <a href="https://maps.google.com" target="_blank">Google Maps</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function selectBarber(id) {
+    ['b1','b2','b3'].forEach(b => document.getElementById(b).classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+  function selectTime(btn) {
+    document.querySelectorAll('.time-btn:not(.taken)').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  }
+  function confirmBooking() {
+    const banner = document.getElementById('confirmBanner');
+    banner.style.display = 'block';
+    setTimeout(() => banner.style.display = 'none', 5000);
+  }
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  document.getElementById('bookDate').value = tomorrow.toISOString().split('T')[0];
+</script>
+</body>
+</html>
